@@ -24,6 +24,7 @@ export default defineConfig({
     assetsInclude: 'src/renderer/src/assets/**',
     resolve: {
       alias: {
+        '@': resolve('src/renderer/src'),
         '@renderer': resolve('src/renderer/src'),
         '@shared': resolve('src/shared'),
         '@/hooks': resolve('src/renderer/src/hooks'),
@@ -31,7 +32,7 @@ export default defineConfig({
         '@/store': resolve('src/renderer/src/store'),
         '@/components': resolve('src/renderer/src/components'),
         '@/mocks': resolve('src/renderer/src/mocks')
-      }
+      } // TODO: fix alias.
     },
     plugins: [react()],
     css: {
