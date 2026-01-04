@@ -1,16 +1,37 @@
 import { NoteInfo } from '@renderer/shared/models'
+import { cn, formatDateFromMS } from '../utils'
 import { ComponentProps, JSX } from 'react'
 
 export type NotePreviewProps = NoteInfo & {
   isActive?: boolean
 } & ComponentProps<'div'>
 
-export const NotePreview = ({ ...props }: NotePreviewProps): JSX.Element => {
-  const date = new Date(props.lastEditTime);
+export const NotePreview = ({
+  title,
+  content,
+  lastEditTime,
+  isActive = false,
+  className,
+  ...props
+}: NotePreviewProps): JSX.Element => {
+  const date = formatDateFromMS(lastEditTime)
 
   return (
-    <div {...props}>
-      {props.title}, {date.getDate()}/{date.getMonth() + 1}/{date.getFullYear()} - {date.getHours()}:{date.getMinutes()}:{date.getSeconds()}
+    <div
+      className={cn(
+        'cursor-pointer px-2.5 py-3 rounded-md transition-colors duration-75',
+        {
+          'bg-zinc-400/75': isActive,
+          'hover:bg-zinc-500/75': !isActive
+        },
+        className
+      )}
+      {...props}
+    >
+      <h3 className="mb-1 font-bold truncate">{title}</h3>
+      <span className="inline-block w-full mb-2 text-xs font-light text-left">{date}</span>
+
+      <div>{content}</div>
     </div>
   )
 }

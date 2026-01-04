@@ -28,5 +28,5 @@ export const notesMock: NoteInfo[] = [
   {
     title: 'Note 7',
     lastEditTime: new Date().getTime()
-  },
+  }
 ]
