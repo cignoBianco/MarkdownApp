@@ -8,7 +8,6 @@ export type NotePreviewProps = NoteInfo & {
 
 export const NotePreview = ({
   title,
-  content,
   lastEditTime,
   isActive = false,
   className,
@@ -30,8 +29,6 @@ export const NotePreview = ({
     >
       <h3 className="mb-1 font-bold truncate">{title}</h3>
       <span className="inline-block w-full mb-2 text-xs font-light text-left">{date}</span>
-
-      <div>{content}</div>
     </div>
   )
 }
