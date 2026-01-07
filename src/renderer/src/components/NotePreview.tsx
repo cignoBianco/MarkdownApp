@@ -1,5 +1,5 @@
 import { NoteInfo } from '@renderer/shared/models'
-import { cn, formatDateFromMS } from '../utils'
+import { cn, formatDateFromMS } from '@renderer/utils'
 import { ComponentProps, JSX } from 'react'
 
 export type NotePreviewProps = NoteInfo & {

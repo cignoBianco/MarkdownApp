@@ -5,7 +5,7 @@ import {
   MDXEditor,
   quotePlugin
 } from '@mdxeditor/editor'
-import { useMarkdownEditor } from '../hooks/useMarkdownEditor'
+import { useMarkdownEditor } from '@renderer/hooks/useMarkdownEditor'
 import { JSX } from 'react'
 
 export const MarkdownEditor = (): JSX.Element | null => {

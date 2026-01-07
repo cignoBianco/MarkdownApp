@@ -1,7 +1,7 @@
+import { useNotesList } from '@renderer/hooks/useNotesList'
 import { ComponentProps, JSX } from 'react'
-import { NotePreview } from './NotePreview'
 import { twMerge } from 'tailwind-merge'
-import { useNotesList } from '../hooks/useNotesList'
+import { NotePreview } from './NotePreview'
 
 export type NotePreviewListProps = ComponentProps<'ul'> & {
   onSelect?: () => void

@@ -1,4 +1,4 @@
-import { useNotesList } from '../hooks/useNotesList'
+import { useNotesList } from '@renderer/hooks/useNotesList'
 import { ComponentProps, JSX } from 'react'
 import { twMerge } from 'tailwind-merge'
 
