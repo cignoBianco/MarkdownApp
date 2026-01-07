@@ -1,7 +1,7 @@
-import { createEmptyNoteAtom } from '@store/index'
 import { useSetAtom } from 'jotai'
 import { JSX } from 'react'
 import { LuSignature } from 'react-icons/lu'
+import { createEmptyNoteAtom } from '../../store/index'
 import { ActionButton, ActionButtonProps } from './ActionButton'
 
 export const NewNoteButton = ({ ...props }: ActionButtonProps): JSX.Element => {

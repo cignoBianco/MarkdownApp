@@ -1,6 +1,6 @@
 import { NoteInfo } from '@renderer/shared/models'
-import { cn, formatDateFromMS } from '@renderer/utils'
 import { ComponentProps, JSX } from 'react'
+import { cn, formatDateFromMS } from '../utils'
 
 export type NotePreviewProps = NoteInfo & {
   isActive?: boolean

@@ -1,6 +1,6 @@
-import { useNotesList } from '@renderer/hooks/useNotesList'
 import { ComponentProps, JSX } from 'react'
 import { twMerge } from 'tailwind-merge'
+import { useNotesList } from '../hooks/useNotesList'
 
 export const FloatingNoteTitle = ({ className, ...props }: ComponentProps<'div'>): JSX.Element => {
   const { selectedNoteItem } = useNotesList({})
