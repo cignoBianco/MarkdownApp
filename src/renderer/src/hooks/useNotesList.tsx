@@ -1,6 +1,6 @@
-import { NoteInfo } from '@renderer/shared/models'
-import { notesAtom, selectedNoteAtom, selectedNoteIndexAtom } from '../store'
+import { FullNote, NoteInfo } from '@renderer/shared/models'
 import { useAtom, useAtomValue } from 'jotai'
+import { notesAtom, selectedNoteAtom, selectedNoteIndexAtom } from '../store'
 
 export const useNotesList = ({
   onSelect
@@ -10,11 +10,7 @@ export const useNotesList = ({
   notes: NoteInfo[]
   selectedNoteIndex: number | null
   handleNotesSelect: (index: number) => () => Promise<void>
-  selectedNoteItem: {
-    content: string
-    title: string
-    lastEditTime: number
-  } | null
+  selectedNoteItem: FullNote | null
 } => {
   const notes = useAtomValue(notesAtom)
 
