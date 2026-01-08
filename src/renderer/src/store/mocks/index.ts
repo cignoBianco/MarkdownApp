@@ -1,4 +1,4 @@
-import { NoteInfo } from '@shared/models'
+import { NoteInfo } from 'src/shared/models'
 
 export const notesMock: NoteInfo[] = [
   {

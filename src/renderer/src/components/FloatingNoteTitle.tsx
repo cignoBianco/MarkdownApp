@@ -1,17 +1,16 @@
+import { useAtomValue } from 'jotai'
 import { ComponentProps, JSX } from 'react'
 import { twMerge } from 'tailwind-merge'
-import { useNotesList } from '../hooks/useNotesList'
+import { selectedNoteAtom } from '../store'
 
 export const FloatingNoteTitle = ({ className, ...props }: ComponentProps<'div'>): JSX.Element => {
-  const { selectedNoteItem } = useNotesList({})
+  const selectedNote = useAtomValue(selectedNoteAtom)
 
-  if (!selectedNoteItem) return <></>
-
-  const title = selectedNoteItem.title
+  if (!selectedNote) return <></>
 
   return (
     <div className={twMerge('flex justify-center', className)} {...props}>
-      <span className="text-gray-400">{title}</span>
+      <span className="text-gray-400">{selectedNote.title}</span>
     </div>
   )
 }

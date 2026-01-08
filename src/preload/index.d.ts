@@ -1,4 +1,4 @@
-import { GetNotes } from '@renderer/shared/types'
+import { GetNotes } from '../shared/types'
 
 declare global {
   interface Window {

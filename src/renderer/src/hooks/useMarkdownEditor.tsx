@@ -1,5 +1,5 @@
-import { FullNote } from '@renderer/shared/models'
 import { useAtomValue } from 'jotai'
+import { FullNote } from 'src/shared/models'
 import { selectedNoteAtom } from '../store/index'
 
 export const useMarkdownEditor = (): {

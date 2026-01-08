@@ -1,11 +1,13 @@
-import { NoteInfo } from '@shared/models'
 import { GetNotes } from '@shared/types'
 import { atom } from 'jotai'
 import { unwrap } from 'jotai/utils'
+import { NoteInfo } from 'src/shared/models'
 // import { notesMock } from './mocks'
 
 const loadNotes: GetNotes = async () => {
-  const notes: NoteInfo[] = await window.context.getNotes()
+  const notes: NoteInfo[] = await window?.context?.getNotes()
+
+  console.log('notesnotes', notes, 'window?.context?.getNotes()', window?.context)
 
   return notes.sort((a, b) => b.lastEditTime - a.lastEditTime)
 }
