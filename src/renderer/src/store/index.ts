@@ -1,13 +1,11 @@
 import { GetNotes } from '@shared/types'
 import { atom } from 'jotai'
 import { unwrap } from 'jotai/utils'
-import { NoteInfo } from 'src/shared/models'
+import { NoteContent, NoteInfo } from 'src/shared/models'
 // import { notesMock } from './mocks'
 
 const loadNotes: GetNotes = async () => {
   const notes: NoteInfo[] = await window?.context?.getNotes()
-
-  console.log('notesnotes', notes, 'window?.context?.getNotes()', window?.context)
 
   return notes.sort((a, b) => b.lastEditTime - a.lastEditTime)
 }
@@ -26,9 +24,11 @@ export const selectedNoteAtomAsync = atom(async (get) => {
 
   const selectedNote = notes[selectedNoteIndex]
 
+  const content = await window?.context?.readNote(selectedNote.title)
+
   return {
     ...selectedNote,
-    content: `Hello from Note${selectedNoteIndex}`
+    content: content
   }
 })
 
@@ -42,11 +42,37 @@ export const selectedNoteAtom = unwrap(
     }
 )
 
+export const saveNoteAtom = atom(null, async (get, set, newContent: NoteContent) => {
+  const selectedNote = get(selectedNoteAtom)
+  if (!selectedNote) return
+
+  const notes = get(notesAtom)
+  if (!notes) return
+
+  await window.context.writeNote(selectedNote.title, newContent)
+
+  set(
+    notesAtom,
+    notes.map((note) => {
+      if (note.title === selectedNote.title) {
+        return {
+          ...note,
+          lastEditTime: Date.now()
+        }
+      }
+
+      return note
+    })
+  )
+})
+
 export const createEmptyNoteAtom = atom(null, async (get, set) => {
   const notes = get(notesAtom)
   if (!notes) return
 
-  const title = `Note ${notes.length + 1}`
+  const title = await window?.context?.createNote()
+
+  if (!title) return
 
   const newNote: NoteInfo = {
     title,
@@ -61,6 +87,8 @@ export const createEmptyNoteAtom = atom(null, async (get, set) => {
 export const deleteNoteAtom = atom(null, async (get, set) => {
   const selectedNote = get(selectedNoteAtom)
   if (!selectedNote) return
+
+  await window?.context?.removeNote(selectedNote.title)
 
   const notes = get(notesAtom)
   if (!notes) return

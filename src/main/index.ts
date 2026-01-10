@@ -1,9 +1,10 @@
 import { electronApp, is, optimizer } from '@electron-toolkit/utils'
-import { GetNotes } from '@shared/types'
+import { NoteContent, NoteInfo } from '@shared/models'
+import { CreateNote, GetNotes } from '@shared/types'
 import { app, BrowserWindow, ipcMain, shell } from 'electron'
 import { join } from 'path'
 import icon from '../../resources/icon.png?asset'
-import { getNotes } from './lib'
+import { createNote, getNotes, readNote, removeNote, writeNote } from './lib'
 
 function createWindow(): void {
   // Create the browser window.
@@ -64,6 +65,20 @@ app.whenReady().then(() => {
   ipcMain.on('ping', () => console.log('pong'))
 
   ipcMain.handle('getNotes', (_, ...args: Parameters<GetNotes>) => getNotes(...args))
+
+  ipcMain.handle('readNote', (_, selectedNote: string, ...args: Parameters<GetNotes>) =>
+    readNote(selectedNote, ...args)
+  )
+
+  ipcMain.handle('writeNote', (_, title: NoteInfo['title'], content: NoteContent) =>
+    writeNote(title, content)
+  )
+
+  ipcMain.handle('createNote', (_, ...args: Parameters<CreateNote>) => createNote(...args))
+
+  ipcMain.handle('removeNote', (_, selectedNote: string, ...args: Parameters<GetNotes>) =>
+    removeNote(selectedNote, ...args)
+  )
 
   createWindow()
 

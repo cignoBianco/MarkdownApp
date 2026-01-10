@@ -1,4 +1,4 @@
-import { GetNotes } from '../shared/types'
+import { CreateNote, GetNotes, ReadNote, RemoveNote, WriteNote } from '../shared/types'
 
 declare global {
   interface Window {
@@ -6,6 +6,10 @@ declare global {
     context: {
       locale: string
       getNotes: GetNotes
+      readNote: ReadNote
+      writeNote: WriteNote
+      createNote: CreateNote
+      removeNote: RemoveNote
     }
   }
 }
