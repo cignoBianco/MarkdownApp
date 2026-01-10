@@ -88,7 +88,9 @@ export const deleteNoteAtom = atom(null, async (get, set) => {
   const selectedNote = get(selectedNoteAtom)
   if (!selectedNote) return
 
-  await window?.context?.removeNote(selectedNote.title)
+  const isDeleted = await window?.context?.removeNote(selectedNote.title)
+
+  if (!isDeleted) return
 
   const notes = get(notesAtom)
   if (!notes) return
